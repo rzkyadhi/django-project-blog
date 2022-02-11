@@ -15,7 +15,7 @@
 
 <div class="row">
   <div class="leftcolumn">
-    {% for post in posts reversed %}
+    {% for post in paginate %}
     <div class="card">
       <a style="text-decoration: none; color: black;" href="/post/{{post.id}}">
         <h2>{{post.title}}</h2>
@@ -26,5 +26,17 @@
     {% endfor %}
   </div>
 </div>
+{% if paginate.has_previous %}
+  <button style="text-align: center;"><h4><a style="text-decoration: none; color: black;" href="?page=1">&laquo; First</a></h4></button>
+  <button style="text-align: center;"><h4><a style="text-decoration: none; color: black;" href="?page={{paginate.previous_page_number}}">previous</a></h4></button>
+{% elif paginate.has_next %}
+  <button style="text-align: center;"><h4><a style="text-decoration: none; color: black;" href="?page={{paginate.next_page_number}}">{{paginate.next_page_number}}</a></h4></button>
+  <button style="text-align: center;"><h4><a style="text-decoration: none; color: black;" href="?page={{paginate.paginator.num_pages}}">last &raquo;</a></h4></button>
+{% endif %}
+<br>
+<h2>Page {{paginate.number}} of {{paginate.paginator.num_pages}}</h2>
+
+
+
 </body>
 </html>
